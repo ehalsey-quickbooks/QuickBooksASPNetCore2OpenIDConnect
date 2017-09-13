@@ -76,6 +76,7 @@ namespace QuickBooksASPNetCore2OpenIDConnect.Pages.Account
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+                await _signInManager.UpdateExternalAuthenticationTokensAsync(info);
                 return LocalRedirect(Url.GetLocalUrl(returnUrl));
             }
             if (result.IsLockedOut)

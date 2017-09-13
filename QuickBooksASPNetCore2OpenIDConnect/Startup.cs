@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using QuickBooksASPNetCore2OpenIDConnect.Data;
 using QuickBooksASPNetCore2OpenIDConnect.Services;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace QuickBooksASPNetCore2OpenIDConnect
 {
@@ -32,6 +33,27 @@ namespace QuickBooksASPNetCore2OpenIDConnect
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication(sharedOptions => { })
+                .AddCookie()
+                .AddOpenIdConnect("QuickBooks", "QuickBooks", openIdConnectOptions =>
+                {
+                    openIdConnectOptions.Authority = "QuickBooks";
+                    openIdConnectOptions.UseTokenLifetime = true;
+                    openIdConnectOptions.ClientId = ""; //client id & client secret need to be set w/ your app keys
+                    openIdConnectOptions.ClientSecret = "";
+                    openIdConnectOptions.ResponseType = OpenIdConnectResponseType.Code;
+                    openIdConnectOptions.MetadataAddress = "https://developer.api.intuit.com/.well-known/openid_sandbox_configuration/";    //development path
+                    openIdConnectOptions.ProtocolValidator.RequireNonce = false;
+                    openIdConnectOptions.SaveTokens = true;
+                    openIdConnectOptions.GetClaimsFromUserInfoEndpoint = true;
+                    openIdConnectOptions.Scope.Add("openid");
+                    openIdConnectOptions.Scope.Add("phone");
+                    openIdConnectOptions.Scope.Add("email");
+                    openIdConnectOptions.Scope.Add("address");
+                    openIdConnectOptions.Scope.Add("com.intuit.quickbooks.accounting");
+                    openIdConnectOptions.Scope.Add("com.intuit.quickbooks.payment");
+                });
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
