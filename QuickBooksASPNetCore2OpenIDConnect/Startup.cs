@@ -15,7 +15,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace QuickBooksASPNetCore2OpenIDConnect
 {
-    public class Startup
+    public class Startup 
     {
         public Startup(IConfiguration configuration)
         {
