@@ -13,8 +13,9 @@ You'll need to create a QuickBooks app and copy the Client ID and Client Secret.
 
 [.NET Core](https://www.microsoft.com/net/core#windowscmd)
 
-### Configuring ASP.NET Core Web App
+### Changes required to default ASP.NET Core Web App
 
+[Commit w/ All Required Changes](https://github.com/ehalsey-quickbooks/QuickBooksASPNetCore2OpenIDConnect/commit/cac4dbbeb456cb45085578e70bea45863b4c48f5#diff-410a9990e3579c3ccab3b52fc1c7b26e)
 A [Step By Step Guide](https://github.com/ehalsey-quickbooks/QuickBooksASPNetCore2OpenIDConnect/wiki/Step-By-Step-Guide) with screen shots
 
 ## Built With
